@@ -183,33 +183,3 @@ Les paramètres nécessaires se trouvent principalement dans le fichier "xparame
 ## Approche synchrone:
 
 VOIR CODE [ici] (zybo_code/GPIO_asynchrone.h)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
