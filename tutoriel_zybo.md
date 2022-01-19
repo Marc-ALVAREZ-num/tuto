@@ -12,8 +12,8 @@ Version Vitis      : 2020.1
 carte electronique : Zybo Z7 Zynq-7010
 
 
-## Démarche à suivre: 
-### Créer un Projet:
+# Démarche à suivre: 
+## Créer un Projet:
 
 - Ouvrir vivado
 - cliquer sur : Create Project
@@ -41,7 +41,7 @@ Deux possibilité pour cela:
 Dans le cas d'une fonction particulière il est évidemment nécessaire de créer le module par nous même mais 90% du temps il sera possible d'utiliser les IPs.
 
 
-### Créer un Design    
+## Créer un Design    
 #### (IP catalog peut être utile à ouvrir)
 
 - Dans IP Integrator, cliquer sur Create Block Design
@@ -78,7 +78,7 @@ Néanmoins dans notre cas nous utilisons la puissance de calcul du microprocesse
 
 
 
-### Créer et compléter un fichier contraintes
+## Créer et compléter un fichier contraintes
 
 Le fichier contraintes permet de lié les signaux créés dans le design et les pins/broches de la carte électronique. C'est la partie FPGA (PL) qui permet de choisir facilement l'emplacement des différents signaux.
 		
@@ -86,11 +86,12 @@ Le fichier contraintes permet de lié les signaux créés dans le design et les 
 Trouvable sur internet. Ce fichier montre toutes les broches activable sur notre board.
 - Pour activer une broche il suffit de décommenter la ligne de code correspondante. 
 - Pour lié le signal à la broche il faut récupérer le nom du signal à partir du fichier .vhd précédemment créé et remplacer la partie précédée de "get_ports"
-			exemple: affilier un signal à un switch
-				avant : #set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { sw[0] }]; #IO_L19N_T3_VREF_35 Sch=sw[0]
-				après :  set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { mon_signal}]; #IO_L19N_T3_VREF_35 Sch=sw[0]
 
-### Crétion de projet Vitis
+###### exemple: affilier un signal à un switch
+###### avant : #set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { sw[0] }]; #IO_L19N_T3_VREF_35 Sch=sw[0]
+###### après :  set_property -dict { PACKAGE_PIN G15   IOSTANDARD LVCMOS33 } [get_ports { mon_signal}]; #IO_L19N_T3_VREF_35 Sch=sw[0]
+
+## Crétion de projet Vitis
 
 - A partir de Vivado cliquer sur file -> export -> export harware -> fixed -> next -> include bitstream
 - Donner le nom et l'emplacement du fichier .XSA aisni créé.
@@ -126,7 +127,7 @@ De même dans cette partie nous trouverons tous les fichiers .h et .c en lien av
 C'est à partir de ces fichiers que l'on trouvera les fonctions créées pour le projet. Il est évident qu'il est toujours possible de ne pas les utiliser et de vouloir créer ses propres fonctions -> chronophage la plupart du temps
 
 
-## Fonctions importantes:
+# Fonctions importantes:
 
 Dans cette partie je ne chercherais pas à expliquer comment fonctionnent les fonctions mais plutôt expliquer quelles fonctions sont indispensables et auquelle on ne penserait pas naturellement.
 
@@ -153,28 +154,23 @@ dans un protocol particulier.
 Ici comme nous utilisons un protocole connu et déjà employé il est simple de trouver parmis les fonctions fournis un gestionnaire déjà créé: XIic_InterruptHandler();
 
 Pour connecter le GIC au gestionnaire d'interruptions on utilise les fonctions suivantes:
-		- XScuGic_Connect();
-		- XScuGic_Enable();
+- XScuGic_Connect();
+- XScuGic_Enable();
 
-Ces fonctions connectent puis activent les interruptions IIC du GIC.
+Ces fonctions connectent puis activent des interruptions au GIC.
+
+Finalement une fois que les initialisations sont faites, que les connections sont faites et que le GIC est en route il est possible de démarrer l'interface IIC (ou autres si besoin): 
+XIic_Start();
+
+Pour les GPIOs une étape est nécessaire à l'instar du démarrage d'une interface; configurer le GPIO, c'est à dire déterminer si c'est une entrée ou une sortie: 
+XGpio_SetDataDirection();
 
 
-Finalement une fois que les initialisations sont faites, que les connections sont faites et que le GIC est en route il est possible de démarrer l'interface IIC (ou autres si besoin): XIic_Start();
-	Pour les GPIOs une étape est nécessaire à l'instar du démarrage d'une interface; configurer le GPIO, c'est à dire déterminer si c'est une entrée ou une sortie: XGpio_SetDataDirection();
+# Approche séquentielle: 
+C'est à dire toutes les commandes sont dans la boucle infinie et sont envoyées les unes après les autres.
 
 
-Approche séquentielle: C'est à dire toutes les commandes sont dans la boucle infinie et sont envoyées les unes après les autres.
-
-
-while(1)
-    {
-    	
-	XIic_Recv(I2C_Baseaddress, 0x64,&data8, 1, XIIC_STOP);
-
-    	data32=data8;
-    	XGpio_DiscreteWrite(&monGPIO, CHANNEL_GPIO_LED,data32);
-    }
-
+voir code [ici](code_perso)
 
 Ce code va donc demander une information au STM32 dont l'adresse est 100 ou 0x64 puis récupérer l'info afin d'allumer les LEDs.
 
