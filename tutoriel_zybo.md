@@ -144,7 +144,7 @@ Pour cela il faut l'initialiser et le configurer:
 - XScuGic_CfgInitialize();
 - InterruptSystemSetup();   Cette fonction je l'ai trouvé en ligne donc la voici ci dessous:
 					
-voir code [ici](code_perso)
+voir code [ici](code.h)
 
 
 
@@ -166,11 +166,11 @@ Pour les GPIOs une étape est nécessaire à l'instar du démarrage d'une interf
 XGpio_SetDataDirection();
 
 
-# Approche séquentielle: 
+## Approche séquentielle: 
 C'est à dire toutes les commandes sont dans la boucle infinie et sont envoyées les unes après les autres.
 
 
-voir code [ici](code_perso)
+VOIR CODE [ici] (code.h)
 
 Ce code va donc demander une information au STM32 dont l'adresse est 100 ou 0x64 puis récupérer l'info afin d'allumer les LEDs.
 
@@ -180,9 +180,9 @@ Pour cela il faudrait une approche synchrone en machine d'état utilisant des in
 #### ATTENTION:
 Les paramètres nécessaires se trouvent principalement dans le fichier "xparameters.h". De plus pour connaitre ce dont on a besoin : clique droit sur la fonction -> open declaration
 
-Approche synchrone:
+## Approche synchrone:
 
-
+VOIR CODE [ici] (code.h)
 
 
 
