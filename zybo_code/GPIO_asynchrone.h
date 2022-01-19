@@ -149,7 +149,7 @@ void InterruptGPIOHandler(void)
 
 	u32 LEDs;
 
-	XGpio_InterruptDisable(&MesSWs_driver, SWS_BTN_INT);
+	XGpio_InterruptGlobalDisable(&MesBTN_SW_driver);
 	/*
 	 * Verify that each of the inputs are valid.
 	 */
