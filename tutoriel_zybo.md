@@ -143,7 +143,7 @@ Pour cela il faut l'initialiser et le configurer:
 - XScuGic_CfgInitialize();
 - InterruptSystemSetup();   Cette fonction je l'ai trouvé en ligne donc la voici ci dessous:
 					
-voir code [ici](tuto/code_perso)
+voir code [ici](tuto/code_perso.txt)
 
 
 
