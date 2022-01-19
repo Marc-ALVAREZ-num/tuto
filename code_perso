@@ -1,0 +1,7 @@
+int InterruptSystemSetup(XScuGic *XScuGicInstancePtr)
+	{
+	  // Register GIC interrupt handler
+	  Xil_ExceptionRegisterHandler(XIL_EXCEPTION_ID_INT,(Xil_ExceptionHandler)XScuGic_InterruptHandler, XScuGicInstancePtr);
+	  Xil_ExceptionEnable();
+	  return XST_SUCCESS;
+	}
