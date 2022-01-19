@@ -170,7 +170,7 @@ XGpio_SetDataDirection();
 C'est à dire toutes les commandes sont dans la boucle infinie et sont envoyées les unes après les autres.
 
 
-VOIR CODE [ici] (zybo_code/GPIO_sequentielle.h)
+VOIR CODE [ici](zybo_code/GPIO_sequentielle.h)
 
 Ce code va donc demander une information au STM32 dont l'adresse est 100 ou 0x64 puis récupérer l'info afin d'allumer les LEDs.
 
@@ -182,4 +182,4 @@ Les paramètres nécessaires se trouvent principalement dans le fichier "xparame
 
 ## Approche synchrone:
 
-VOIR CODE [ici] (zybo_code/GPIO_asynchrone.h)
+VOIR CODE [ici](zybo_code/GPIO_asynchrone.h)
