@@ -13,18 +13,28 @@ carte electronique : Zybo Z7 Zynq-7010
 
 
 # Démarche à suivre: 
+
 ## Créer un Projet:
 
 - Ouvrir vivado
 - cliquer sur : Create Project
-- next
-- nommer le projet puis donner une localisation du dossier 
+
+![image](./images/Capture_1.PNG)
+
+- cliquer sur "Next"
+- nommer le projet puis donner une localisation du dossier, cliquer sur "Next"
 - choisir : RTL Project
-- Pas nécessaire de créer des sources pour le moment
+  - laisser décoché l'option "Pas nécessaire de créer des sources pour le moment"
+  - cliquer sur "Next"
 - verifier en bas à droite que dans la mention : Target source, cela soit bien VHDL.
+  - cliquer sur "Next"
 - Pas besoin de créer de fichier contrainte non plus 
-- cliquer sur : board        en haut à gauche
-- choix de la board utilisée : Zybo Z7-10
+  - cliquer sur "Next"
+- sur la page de selection du HW:
+  - cliquer sur : board en haut à gauche
+  - cliquer sur "Install/update Boards"
+  - choix de la board utilisée : Zybo Z7-10
+  - cliquer sur "Next"
 - Finish 
 
 A ce moment là, cela ouvre une fentere avec les sources éventuelles que l'on a créé, un résumé des paramètres de notre projet et une console.
